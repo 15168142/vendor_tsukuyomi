@@ -9,11 +9,7 @@ function check_product()
         echo "Couldn't locate the top of the tree. Try setting TOP." >&2
         return
     fi
-    if (echo -n $1 | grep -q -e "^custom_") ; then
-        CUSTOM_BUILD=$(echo -n $1 | sed -e 's/^custom_//g')
-    else
-        CUSTOM_BUILD=
-    fi
+    CUSTOM_BUILD=$1
     export CUSTOM_BUILD
 
         TARGET_PRODUCT=$1 \
@@ -56,7 +52,7 @@ function breakfast()
                 variant="userdebug"
             fi
 
-            lunch custom_$target-$aosp_target_release-$variant
+            lunch $target-$aosp_target_release-$variant
         fi
     fi
     return $?
